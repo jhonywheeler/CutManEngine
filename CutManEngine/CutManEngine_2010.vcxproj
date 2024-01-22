@@ -424,6 +424,7 @@
   <ItemGroup />
   <ItemGroup>
     <ClCompile Include="CutManEngine.cpp" />
+    <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CutManEngine.fx">
@@ -436,7 +437,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <CLInclude Include="resource.h" />
+    <ClInclude Include="include\Resource.h" />
+    <ClInclude Include="include\Window.h" />
+    <ClInclude Include="src\Prerequisites.h" />
     <ResourceCompile Include="CutManEngine.rc" />
   </ItemGroup>
   <ItemGroup>
