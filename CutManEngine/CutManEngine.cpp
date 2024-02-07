@@ -10,6 +10,7 @@
 #include <Device.h>
 #include "DeviceContext.h"
 #include "DepthStencilView.h"
+#include "Texture.h"
 
 //--------------------------------------------------------------------------------------
 // Structures
@@ -43,7 +44,9 @@ struct CBChangesEveryFrame
 Window                              g_window;
 Device                              g_device;
 DeviceContext                       g_deviceContext;
+Texture                             g_depthStencil;
 DepthStencilView                    g_depthStencilView;
+
 //HINSTANCE                           g_hInst = nullptr;
 //HWND                                g_hWnd = nullptr;
 D3D_DRIVER_TYPE                     g_driverType = D3D_DRIVER_TYPE_NULL;
@@ -52,7 +55,7 @@ D3D_FEATURE_LEVEL                   g_featureLevel = D3D_FEATURE_LEVEL_11_0;
 //ID3D11DeviceContext*                g_pImmediateContext = nullptr;
 IDXGISwapChain*                     g_pSwapChain = nullptr;
 ID3D11RenderTargetView*             g_pRenderTargetView = nullptr;
-ID3D11Texture2D*                    g_pDepthStencil = nullptr;
+//ID3D11Texture2D*                    g_pDepthStencil = nullptr;
 //ID3D11DepthStencilView*             g_pDepthStencilView = nullptr;
 ID3D11VertexShader*                 g_pVertexShader = nullptr;
 ID3D11PixelShader*                  g_pPixelShader = nullptr;
@@ -213,7 +216,7 @@ HRESULT InitDevice()
     if( FAILED( hr ) )
         return hr;
 
-    // Create depth stencil texture
+    /* Create depth stencil texture
     D3D11_TEXTURE2D_DESC descDepth;
     ZeroMemory( &descDepth, sizeof(descDepth) );
     descDepth.Width = g_window.m_width;
@@ -229,7 +232,13 @@ HRESULT InitDevice()
     descDepth.MiscFlags = 0;
     hr = g_device.CreateTexture2D( &descDepth, nullptr, &g_pDepthStencil );
     if( FAILED( hr ) )
-        return hr;
+        return hr;*/
+
+    g_depthStencil.init(g_device,
+                        g_window.m_width,
+                        g_window.m_height,
+                        DXGI_FORMAT_D24_UNORM_S8_UINT,
+                        D3D11_BIND_DEPTH_STENCIL);
 
     //Create the depth stencil view
    //D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
@@ -242,8 +251,8 @@ HRESULT InitDevice()
     //return hr;
 
     g_depthStencilView.init(g_device, 
-                        g_pDepthStencil, 
-                        DXGI_FORMAT_D24_UNORM_S8_UINT);
+                            g_depthStencil.m_texture, 
+                            DXGI_FORMAT_D24_UNORM_S8_UINT);
 
     g_deviceContext.m_deviceContext->OMSetRenderTargets( 1, &g_pRenderTargetView, g_depthStencilView.m_depthStencilView );
 
@@ -478,7 +487,7 @@ void CleanupDevice()
     if( g_pVertexLayout ) g_pVertexLayout->Release();
     if( g_pVertexShader ) g_pVertexShader->Release();
     if( g_pPixelShader ) g_pPixelShader->Release();
-    if( g_pDepthStencil ) g_pDepthStencil->Release();
+    //if( g_pDepthStencil ) g_pDepthStencil->Release();
     //if( g_pDepthStencilView ) g_pDepthStencilView->Release();
     if( g_pRenderTargetView ) g_pRenderTargetView->Release();
     if( g_pSwapChain ) g_pSwapChain->Release();
