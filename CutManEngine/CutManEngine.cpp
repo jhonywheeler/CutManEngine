@@ -11,6 +11,7 @@
 #include "DeviceContext.h"
 #include "DepthStencilView.h"
 #include "Texture.h"
+#include "SwapChain.h"
 
 //--------------------------------------------------------------------------------------
 // Structures
@@ -46,14 +47,16 @@ Device                              g_device;
 DeviceContext                       g_deviceContext;
 Texture                             g_depthStencil;
 DepthStencilView                    g_depthStencilView;
+SwapChain                           g_swapchain;
+Texture                             g_backBuffer;
 
 //HINSTANCE                           g_hInst = nullptr;
 //HWND                                g_hWnd = nullptr;
-D3D_DRIVER_TYPE                     g_driverType = D3D_DRIVER_TYPE_NULL;
-D3D_FEATURE_LEVEL                   g_featureLevel = D3D_FEATURE_LEVEL_11_0;
+//D3D_DRIVER_TYPE                     g_driverType = D3D_DRIVER_TYPE_NULL;
+//D3D_FEATURE_LEVEL                   g_featureLevel = D3D_FEATURE_LEVEL_11_0;
 //ID3D11Device*                       g_pd3dDevice = nullptr;
 //ID3D11DeviceContext*                g_pImmediateContext = nullptr;
-IDXGISwapChain*                     g_pSwapChain = nullptr;
+//IDXGISwapChain*                     g_pSwapChain = nullptr;
 ID3D11RenderTargetView*             g_pRenderTargetView = nullptr;
 //ID3D11Texture2D*                    g_pDepthStencil = nullptr;
 //ID3D11DepthStencilView*             g_pDepthStencilView = nullptr;
@@ -158,7 +161,7 @@ HRESULT CompileShaderFromFile(char* szFileName, LPCSTR szEntryPoint, LPCSTR szSh
 HRESULT InitDevice()
 {
     HRESULT hr = S_OK;
-
+    /*
     UINT createDeviceFlags = 0;
 #ifdef _DEBUG
     createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
@@ -204,15 +207,16 @@ HRESULT InitDevice()
     }
     if( FAILED( hr ) )
         return hr;
-
+        */
+    g_swapchain.init(g_device, g_deviceContext, g_backBuffer, g_window);
     // Create a render target view
-    ID3D11Texture2D* pBackBuffer = nullptr;
-    hr = g_pSwapChain->GetBuffer( 0, __uuidof( ID3D11Texture2D ), ( LPVOID* )&pBackBuffer );
-    if( FAILED( hr ) )
-        return hr;
+    //ID3D11Texture2D* pBackBuffer = nullptr;
+    //hr = g_pSwapChain->GetBuffer( 0, __uuidof( ID3D11Texture2D ), ( LPVOID* )&pBackBuffer );
+    //if( FAILED( hr ) )
+        //return hr;
 
-    hr = g_device.CreateRenderTargetView( pBackBuffer, nullptr, &g_pRenderTargetView );
-    pBackBuffer->Release();
+    hr = g_device.CreateRenderTargetView(g_backBuffer.m_texture, nullptr, &g_pRenderTargetView );
+    g_backBuffer.m_texture->Release();
     if( FAILED( hr ) )
         return hr;
 
@@ -490,7 +494,7 @@ void CleanupDevice()
     //if( g_pDepthStencil ) g_pDepthStencil->Release();
     //if( g_pDepthStencilView ) g_pDepthStencilView->Release();
     if( g_pRenderTargetView ) g_pRenderTargetView->Release();
-    if( g_pSwapChain ) g_pSwapChain->Release();
+    //if( g_pSwapChain ) g_pSwapChain->Release();
     //if(g_deviceContext.m_deviceContext) g_deviceContext.m_deviceContext->Release();
     //if( g_pd3dDevice ) g_pd3dDevice->Release();
     //g.deviceContext.destroy();
@@ -532,7 +536,7 @@ void Render()
 {
     // Update our time
     static float t = 0.0f;
-    if( g_driverType == D3D_DRIVER_TYPE_REFERENCE )
+    if( g_swapchain.m_driverType == D3D_DRIVER_TYPE_REFERENCE )
     {
         t += ( float )XM_PI * 0.0125f;
     }
@@ -589,5 +593,5 @@ void Render()
     //
     // Present our back buffer to our front buffer
     //
-    g_pSwapChain->Present( 0, 0 );
+    g_swapchain.present();
 }

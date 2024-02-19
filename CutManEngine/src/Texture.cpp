@@ -98,6 +98,10 @@ void Texture::init(Device device,
 	}
 }
 
+void Texture::update()
+{
+}
+
 // Renderiza la text asignándola al contexto de device
 void Texture::render(DeviceContext& deviceContext, unsigned int StarSlot)
 {

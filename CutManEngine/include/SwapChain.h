@@ -2,7 +2,7 @@
 
 #include "Prerequisites.h" // Incluir la lib "Prerequisites.h"
 
-// Declaraciones de clases
+// forward declaration o declaracion directa
 class Device;
 class DeviceContext;
 class Window;
@@ -36,22 +36,11 @@ public:
 
 	// Puntero al intercambiador de memoria DXGI
 	IDXGISwapChain* m_swapChain = nullptr;
-
-private:
-
 	// Tipo de controlador de gráficos utilizado 
 	D3D_DRIVER_TYPE m_driverType = D3D_DRIVER_TYPE_NULL;
+
+private:
 
 	// Nivel de características de D3D 
 	D3D_FEATURE_LEVEL m_featureLevel = D3D_FEATURE_LEVEL_11_0;
 };
-
-// Constructor de la clase SwapChain 
-SwapChain::SwapChain()
-{
-}
-
-// Destructor de la clase SwapChain 
-SwapChain::~SwapChain()
-{
-}
