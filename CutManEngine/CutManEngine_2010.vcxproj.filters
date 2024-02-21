@@ -44,6 +44,12 @@
     <ClInclude Include="include\Texture.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="include\RenderTargetView.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Viewport.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CutManEngine.cpp" />
@@ -63,6 +69,12 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\SwapChain.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderTargetView.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Viewport.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

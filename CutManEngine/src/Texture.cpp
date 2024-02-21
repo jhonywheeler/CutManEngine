@@ -5,6 +5,7 @@
 // Destructor 
 Texture::~Texture()
 {
+	/*
 	// Libera memoria si hay una text
 	if (m_texture != nullptr)
 	{
@@ -15,6 +16,7 @@ Texture::~Texture()
 	{
 		SAFE_RELEASE(m_textureFromImg);
 	}
+	*/
 }
 
 // Inicializa una text desde un archivo de imagen

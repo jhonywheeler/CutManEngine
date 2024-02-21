@@ -32,6 +32,16 @@ public:
 		unsigned int NumViews,
 		ID3D11ShaderResourceView* const* ppShaderResourceViews);
 
+	void ClearRenderTargetView(ID3D11RenderTargetView* pRenderTargetView,
+							   const float ColorRGBA[4]);
+
+	void OMSetRenderTargets(unsigned int NumViews,
+							ID3D11RenderTargetView* const* ppRenderTargetViews,
+							ID3D11DepthStencilView* pDepthStencilView);
+
+	void  RSSetViewports(unsigned int NumViewports,
+						 const D3D11_VIEWPORT* pViewports);
+
 public:
 
 	// Puntero al contexto del dispositivo
