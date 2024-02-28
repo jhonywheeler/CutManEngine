@@ -19,11 +19,11 @@
 //--------------------------------------------------------------------------------------
 // Structures
 //--------------------------------------------------------------------------------------
-struct SimpleVertex
+/*struct SimpleVertex
 {
     XMFLOAT3 Pos;
     XMFLOAT2 Tex;
-};
+};*/
 
 struct CBNeverChanges
 {
@@ -181,22 +181,6 @@ HRESULT InitDevice()
     g_viewport.init(g_window);
 
     // Compile the vertex shader
-    /*ID3DBlob* pVSBlob = nullptr;
-    hr = CompileShaderFromFile( "CutManEngine.fx", "VS", "vs_4_0", &pVSBlob );
-    if( FAILED( hr ) )
-    {
-        MessageBox( nullptr,
-                    "The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", "Error", MB_OK );
-        return hr;
-    }
-
-    // Create the vertex shader
-    hr = g_device.CreateVertexShader( pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &g_pVertexShader );
-    if( FAILED( hr ) )
-    {    
-        pVSBlob->Release();
-        return hr;
-    }*/
 
     // Define the input layout
     D3D11_INPUT_ELEMENT_DESC layout[] =
@@ -231,30 +215,12 @@ HRESULT InitDevice()
     g_shaderProgram.init(g_device, "CutManEngine.fx", Layout);
 
     // Create the input layout
-    //hr = g_device.CreateInputLayout( layout, numElements, pVSBlob->GetBufferPointer(),
-                                          //pVSBlob->GetBufferSize(), &g_pVertexLayout );
-   // pVSBlob->Release();
-    //if( FAILED( hr ) )
-        //return hr;
 
     // Set the input layout
-    //g_deviceContext.m_deviceContext->IASetInputLayout( g_pVertexLayout );
 
     // Compile the pixel shader
-    /*ID3DBlob* pPSBlob = nullptr;
-    hr = CompileShaderFromFile( "CutManEngine.fx", "PS", "ps_4_0", &pPSBlob );
-    if( FAILED( hr ) )
-    {
-        MessageBox( nullptr,
-                    "The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", "Error", MB_OK );
-        return hr;
-    }*/
 
     // Create the pixel shader
-    /*hr = g_device.m_device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &g_pPixelShader);
-    pPSBlob->Release();
-    if( FAILED( hr ) )
-        return hr;*/
 
     // Create vertex buffer
     SimpleVertex vertices[] =
