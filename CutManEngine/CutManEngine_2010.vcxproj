@@ -424,6 +424,7 @@
   <ItemGroup />
   <ItemGroup>
     <ClCompile Include="CutManEngine.cpp" />
+    <ClCompile Include="SamplerState.cpp" />
     <ClCompile Include="src\Buffer.cpp" />
     <ClCompile Include="src\DepthStencilView.cpp" />
     <ClCompile Include="src\Device.cpp" />
@@ -460,6 +461,7 @@
     <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\Viewport.h" />
     <ClInclude Include="include\Window.h" />
+    <ClInclude Include="SamplerState.h" />
     <ResourceCompile Include="CutManEngine.rc" />
   </ItemGroup>
   <ItemGroup>

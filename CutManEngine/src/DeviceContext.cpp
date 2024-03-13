@@ -92,4 +92,44 @@ void DeviceContext::PSSetShader(ID3D11PixelShader* pPixelShader, ID3D11ClassInst
 	m_deviceContext->PSSetShader(pPixelShader, ppClassInstances, NumClassInstances);
 }
 
+void DeviceContext::UpdateSubresource(ID3D11Resource* pDstResource, 
+										unsigned int DstSubresource, 
+										const D3D11_BOX* pDstBox, const void* pSrcData, 
+										unsigned int SrcRowPitch, unsigned int SrcDepthPitch)
+{
+	m_deviceContext->UpdateSubresource(pDstResource,
+										DstSubresource,
+										pDstBox,
+										pSrcData,
+										SrcRowPitch,
+										SrcDepthPitch);
+}
+
+void DeviceContext::IASetVertexBuffer(unsigned int Starlot,
+	unsigned int NumBuffers,
+	ID3D11Buffer* const* ppVertexBuffers,
+	const unsigned int* pStrides,
+	const unsigned int* pOffsets)
+{
+	m_deviceContext->IASetVertexBuffers(Starlot,
+		NumBuffers,
+		ppVertexBuffers,
+		pStrides,
+		pOffsets);
+}
+
+void DeviceContext::IASetIndexBuffer(ID3D11Buffer* pIndexBuffer,
+	DXGI_FORMAT format,
+	unsigned int Offset)
+{
+	m_deviceContext->IASetIndexBuffer(pIndexBuffer, format, Offset);
+}
+
+void DeviceContext::PSSetSamplers(unsigned int StartSlot,
+	unsigned int NumSamplers,
+	ID3D11SamplerState* const* ppSamplers)
+{
+	m_deviceContext->PSSetSamplers(StartSlot, NumSamplers, ppSamplers);
+}
+
 
