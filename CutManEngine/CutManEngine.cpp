@@ -7,7 +7,6 @@
 //--------------------------------------------------------------------------------------
 #include "Prerequisites.h"
 
-
 #include "Window.h"
 #include "Device.h"
 #include "DeviceContext.h"
@@ -19,8 +18,7 @@
 #include "ShaderProgram.h"
 #include "Buffer.h"
 #include "SamplerState.h"
-
-
+#include "ModelLoader.h"
 
 //--------------------------------------------------------------------------------------
 // Structures
@@ -69,13 +67,15 @@ ID3D11Buffer* g_pCBChangeOnResize = nullptr;
 ID3D11Buffer* g_pCBChangesEveryFrame = nullptr;
 ID3D11ShaderResourceView* g_pTextureRV = nullptr;
 SamplerState                        g_sampler;
+ModelLoader                         g_loader;
+
 
 
 XMMATRIX                            g_World;
 XMMATRIX                            g_View;
 XMMATRIX                            g_Projection;
 XMFLOAT4                            g_vMeshColor(0.7f, 0.7f, 0.7f, 1.0f);
-Mesh                                g_mesh;
+Mesh                                g_mesh; //Usamos la Variable que ya teniamos en vez de la del video 
 
 //--------------------------------------------------------------------------------------
 // Forward declarations
@@ -127,12 +127,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     return (int)msg.wParam;
 }
 
-
 //--------------------------------------------------------------------------------------
 // Register class and create window
 //--------------------------------------------------------------------------------------
-
-
 
 //--------------------------------------------------------------------------------------
 // Helper for compiling shaders with D3DX11
@@ -164,7 +161,6 @@ HRESULT CompileShaderFromFile(char* szFileName, LPCSTR szEntryPoint, LPCSTR szSh
 
     return S_OK;
 }
-
 
 //--------------------------------------------------------------------------------------
 // Create Direct3D device and swap chain
@@ -275,14 +271,14 @@ HRESULT InitDevice()
         { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
     };
 
+    g_mesh = g_loader.Load("HungryBurger.obj");
+    //  for (SimpleVertex vertex : vertices)
+      //{
+        //  g_mesh.vertex.push_back(vertex);
+      //}
+      //g_mesh.numVertex = g_mesh.vertex.size();
 
-    for (SimpleVertex vertex : vertices)
-    {
-        g_mesh.vertex.push_back(vertex);
-    }
-    g_mesh.numVertex = g_mesh.vertex.size();
-
-    // Create vertex buffer
+      // Create vertex buffer
     g_vertexBuffer.init(g_device, g_mesh, D3D11_BIND_VERTEX_BUFFER);
 
     unsigned int indices[] =
@@ -306,13 +302,13 @@ HRESULT InitDevice()
         23,20,22
     };
 
-    for (unsigned int index : indices)
-    {
-        g_mesh.index.push_back(index);
-    }
-    g_mesh.numIndex = g_mesh.index.size();
+    //for (unsigned int index : indices)
+     //{
+    //     g_mesh.index.push_back(index);
+     //}
+     //g_mesh.numIndex = g_mesh.index.size();
 
-    // Create index buffer
+     // Create index buffer
 
     g_indexBuffer.init(g_device, g_mesh, D3D11_BIND_INDEX_BUFFER);
 

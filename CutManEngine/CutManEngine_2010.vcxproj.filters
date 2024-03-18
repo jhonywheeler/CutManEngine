@@ -59,7 +59,13 @@
     <ClInclude Include="include\Buffer.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="SamplerState.h">
+    <ClInclude Include="include\ModelLoader.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OBJ_Loader.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SamplerState.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -98,7 +104,10 @@
     <ClCompile Include="src\Buffer.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="SamplerState.cpp">
+    <ClCompile Include="src\ModelLoader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SamplerState.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
