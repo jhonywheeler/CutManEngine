@@ -64,6 +64,7 @@ void Buffer::init(Device device, Mesh mesh, unsigned int bindFlag)
 	}
 }
 
+// Método para inicializar el buffer con un tamaño especificado
 void Buffer::init(Device device, unsigned int ByteWidth)
 {
 	if (device.m_device == nullptr)
@@ -98,6 +99,8 @@ void Buffer::init(Device device, unsigned int ByteWidth)
 	}
 }
 
+// Método para actualizar el buffer con nuevos datos
+
 void Buffer::update(DeviceContext& deviceContext,
 	unsigned int DstSubresource,
 	const D3D11_BOX* pDstBox,
@@ -112,6 +115,8 @@ void Buffer::update(DeviceContext& deviceContext,
 		SrcRowPitch,
 		SrcDepthPitch);
 }
+
+// Método para renderizar utilizando el buffer como un vertex buffer
 
 void Buffer::render(DeviceContext& deviceContext,
 	unsigned int StarSlot,
@@ -128,6 +133,8 @@ void Buffer::render(DeviceContext& deviceContext,
 	}
 }
 
+// Método para renderizar utilizando el buffer como un index buffer
+
 void Buffer::render(DeviceContext& deviceContext, DXGI_FORMAT format)
 {
 	if (m_bindFlag == D3D11_BIND_INDEX_BUFFER)
@@ -140,6 +147,8 @@ void Buffer::render(DeviceContext& deviceContext, DXGI_FORMAT format)
 
 	}
 }
+
+// Método para liberar recursos del buffer
 
 void Buffer::destroy()
 {

@@ -25,7 +25,7 @@ Device::CreateRenderTargetView(ID3D11Resource* pResource,
 {
 
 	HRESULT hr = S_OK;
-	//Check if the resource and the rTview existe 
+	//Check if the resource and the PPRTView existe 
 	if (pResource != nullptr || ppRTView != nullptr)
 	{
 		hr = m_device->CreateRenderTargetView(pResource, pDesc, ppRTView);

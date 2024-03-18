@@ -2,6 +2,8 @@
 #include "Device.h"
 #include "DeviceContext.h"
 
+// Método para inicializar el Sampler State
+
 void SamplerState::init(Device device)
 {
     if (device.m_device == nullptr)
@@ -9,6 +11,8 @@ void SamplerState::init(Device device)
         WARNING("ERROR: SampplerState::init : Error in data from params [CHECK FOR Device device] \n");
         exit(1);
     }
+
+    // Configuración del descriptor del Sampler State
 
     HRESULT hr = S_OK;
     D3D11_SAMPLER_DESC sampDesc;
@@ -21,6 +25,8 @@ void SamplerState::init(Device device)
     sampDesc.MinLOD = 0;
     sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
+    // Creamos el estado del Sampler State
+
     hr = device.CreateSamplerState(&sampDesc, &m_sampler);
     if (FAILED(hr))
     {
@@ -32,6 +38,8 @@ void SamplerState::init(Device device)
 void SamplerState::update()
 {
 }
+
+// Método para Sampler State en el Device Context
 
 void SamplerState::render(DeviceContext& deviceContext,
     unsigned int StartSlot,

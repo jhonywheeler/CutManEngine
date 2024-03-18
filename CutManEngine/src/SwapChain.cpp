@@ -4,11 +4,15 @@
 #include "Window.h"
 #include "Texture.h"
 
+// Método para inicializar el SwapChain
+
 void SwapChain::init(Device& device, 
 					 DeviceContext& deviceContext, 
 					 Texture& backBuffer, 
 					 Window window)
 {
+    // Verificar si el identificador de Window es nulo
+
 	if (window.m_hWnd == nullptr)
 	{
 		WARNING("ERROR: SwapChain::init : Error in data from params [CHECK FOR Window window]\n");
@@ -35,6 +39,8 @@ void SwapChain::init(Device& device,
     };
     unsigned int numFeatureLevels = ARRAYSIZE(featureLevels);
 
+    // Configuración del SwapChain
+
     DXGI_SWAP_CHAIN_DESC sd;
     memset(&sd, 0, sizeof(sd));
     sd.BufferCount = 1;
@@ -51,6 +57,8 @@ void SwapChain::init(Device& device,
 
     HRESULT hr = S_OK;
 
+    // Creación del Device y la SwapChain
+
     for (unsigned int driverTypeIndex = 0; driverTypeIndex < numDriverTypes; driverTypeIndex++)
     {
         m_driverType = driverTypes[driverTypeIndex];
@@ -59,11 +67,11 @@ void SwapChain::init(Device& device,
         if (SUCCEEDED(hr))
             break;
     }
-    if (FAILED(hr))
+    if (FAILED(hr)) // Verificar si la creación fue exitosa
     {
         WARNING("ERROR: SwapChain::init : Error in data from params [CHECK FOR D3D11CreateDeviceAndSwapCahin()]\n");
         exit(1);
-    }
+    }     // Obtener el Buffer del SwapChain
     hr = m_swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&backBuffer.m_texture);
     if (FAILED(hr)){
         WARNING("ERROR: SwapChain::init : Error in data from params [CHECK FOR m_swapChain->GetBuffer()]\n");

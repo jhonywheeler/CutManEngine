@@ -14,9 +14,13 @@ public:
 	RenderTargetView() = default;
 	~RenderTargetView() {};
 
+	// Inicializa la vista de destino del render
+
 	void init(Device device, Texture backBuffer, DXGI_FORMAT Format);
 
 	void update();
+
+	// Renderiza utilizando la vista de destino del render
 
 	void render(DeviceContext & deviceContext,
 				DepthStencilView & depthStencilView,
