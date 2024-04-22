@@ -4,13 +4,15 @@
 #include "Window.h"
 #include "Texture.h"
 
+// Método para inicializar el SwapChain
+
 void
 SwapChain::init(Device& device,
     DeviceContext& deviceContext,
     Texture& backBuffer,
     Window window)
 {
-    //Check if window resource exist
+    // Verificar si el identificador de Window es nulo
     if (window.m_hWnd == nullptr)
     {
         WARNING("ERROR: SnapChain::init : Error in data from params [CHECK FOR Window window ] \n");
@@ -20,7 +22,7 @@ SwapChain::init(Device& device,
 #ifdef _DEBUG
     createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
-
+    //std::vector<D3D_DRIVER_TYPE> dt;
     D3D_DRIVER_TYPE driverTypes[] =
     {
         D3D_DRIVER_TYPE_HARDWARE,
@@ -36,6 +38,7 @@ SwapChain::init(Device& device,
         D3D_FEATURE_LEVEL_10_0,
     };
     unsigned int numFeatureLevels = ARRAYSIZE(featureLevels);
+    // Configuración del SwapChain
 
     DXGI_SWAP_CHAIN_DESC sd;
     memset(&sd, 0, sizeof(sd));
@@ -52,7 +55,7 @@ SwapChain::init(Device& device,
     sd.Windowed = TRUE;
 
     HRESULT hr = S_OK;
-
+    // Creación del Device y la SwapChain
     for (unsigned int driverTypeIndex = 0; driverTypeIndex < numDriverTypes; driverTypeIndex++)
     {
         m_driverType = driverTypes[driverTypeIndex];

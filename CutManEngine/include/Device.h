@@ -4,6 +4,7 @@
 class Device
 {
 public:
+    // Constructor y destructor
     Device() = default;
     ~Device() = default;
 
@@ -25,7 +26,6 @@ public:
             const D3D11_RENDER_TARGET_VIEW_DESC* pDesc,
             ID3D11RenderTargetView** ppRTView);
     // Método para crear una textura 2D
-
     HRESULT
         CreateTexture2D(const D3D11_TEXTURE2D_DESC* pDesc,
             const D3D11_SUBRESOURCE_DATA* pInitialData,
