@@ -34,7 +34,7 @@ HRESULT Window::init(HINSTANCE hInstance, int nCmdShow, WNDPROC wndproc)
         return E_FAIL;
 
     // Crear la ventana
-    RECT rc = { 0, 0, 640, 480 }; // Tamaño inicial de la ventana
+    RECT rc = { 0, 0, 1920, 1080 }; // Tamaño inicial de la ventana
     m_rect = rc;
     AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE); // Ajustar el tamaño de la ventana
     m_hWnd = CreateWindow("TutorialWindowClass", // Clase de ventana registrada
