@@ -9,8 +9,6 @@ class InputLayout
 public:
 	InputLayout() = default;
 	~InputLayout() {};
-	
-	// Método para inicializar el diseño de entrada
 
 	void init(Device device,
 		std::vector<D3D11_INPUT_ELEMENT_DESC> Layout,
@@ -22,8 +20,7 @@ public:
 
 	void destroy();
 
-public: 
-	ID3D11InputLayout* m_inputLayout = nullptr; // Puntero al diseño de entrada en el device
+public:
+	ID3D11InputLayout* m_inputLayout = nullptr;
 
 };
-

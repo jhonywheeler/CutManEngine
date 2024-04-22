@@ -1,4 +1,5 @@
-#include "Window.h" 
+#include "Windows.h"
+#include "Window.h"
 
 Window::Window()
 {
@@ -8,55 +9,59 @@ Window::~Window()
 {
 }
 
-// Método para inicializar la ventana
+// La clase Window se utiliza para inicializar la ventana.
+//  Toma como parámetros el identificador de instancia de la aplicacion 
+// (hInstance), el comando de visualizacion (nCmdShow) y el procedimiento 
+// de ventana (wndproc)
+//Se registra la clase Ventana
+//Se crea la ventana con las dimensiones y el estilo especificado
+//Se ajusta el tamaño de la ventana para que se incluya el marco
+//Se obtinen las dimensiones de la ventana y se actualizan las variables
 HRESULT Window::init(HINSTANCE hInstance, int nCmdShow, WNDPROC wndproc)
 {
-    // Asignar el identificador de instancia de la aplicación
     m_hInst = hInstance;
-
-    // Registrar la clase de la ventana
+    // Register class
     WNDCLASSEX wcex;
     wcex.cbSize = sizeof(WNDCLASSEX);
     wcex.style = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc = wndproc; // Asignar el procedimiento de ventana
+    wcex.lpfnWndProc = wndproc;
     wcex.cbClsExtra = 0;
     wcex.cbWndExtra = 0;
     wcex.hInstance = m_hInst;
-    wcex.hIcon = LoadIcon(m_hInst, (LPCTSTR)IDI_TUTORIAL1); // Cargar el icono de la ventana
-    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW); // Cargar el cursor de la ventana
-    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1); // Establecer el color de fondo de la ventana
+    wcex.hIcon = LoadIcon(m_hInst, (LPCTSTR)IDI_TUTORIAL1);
+    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
     wcex.lpszMenuName = nullptr;
-    wcex.lpszClassName = "TutorialWindowClass"; // Nombre de la clase de la ventana
-    wcex.hIconSm = LoadIcon(wcex.hInstance, (LPCTSTR)IDI_TUTORIAL1); // Cargar el icono pequeño de la ventana
-
-    // Registrar la clase de ventana
+    wcex.lpszClassName = "TutorialWindowClass";
+    wcex.hIconSm = LoadIcon(wcex.hInstance, (LPCTSTR)IDI_TUTORIAL1);
     if (!RegisterClassEx(&wcex))
         return E_FAIL;
 
-    // Crear la ventana
-    RECT rc = { 0, 0, 1920, 1080 }; // Tamaño inicial de la ventana
+    // Create window
+
+    RECT rc = { 0, 0, 1920, 1080 };
     m_rect = rc;
-    AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE); // Ajustar el tamaño de la ventana
-    m_hWnd = CreateWindow("TutorialWindowClass", // Clase de ventana registrada
+    AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
+    m_hWnd = CreateWindow("TutorialWindowClass",
         "Direct3D 11 Tutorial 7", // Título de la ventana
-        WS_OVERLAPPEDWINDOW, // Estilo de la ventana
-        CW_USEDEFAULT, CW_USEDEFAULT, // Posición inicial de la ventana
-        m_rect.right - m_rect.left, // Ancho de la ventana
-        m_rect.bottom - m_rect.top, // Altura de la ventana
-        nullptr, // Ventana padre
-        nullptr, // Menú
-        m_hInst, // Instancia de la aplicación
-        nullptr); // Parámetro adicional
+        WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT,
+        CW_USEDEFAULT,
+        m_rect.right - m_rect.left,
+        m_rect.bottom - m_rect.top,
+        nullptr,
+        nullptr,
+        m_hInst,
+        nullptr);
     if (!m_hWnd)
         return E_FAIL;
 
-    // Mostrar la ventana
     ShowWindow(m_hWnd, nCmdShow);
 
-    // Obtener el tamaño de cliente de la ventana
+
     GetClientRect(m_hWnd, &m_rect);
-    m_width = m_rect.right - m_rect.left; // Calcular el ancho de la ventana
-    m_height = m_rect.bottom - m_rect.top; // Calcular la altura de la ventana
+    m_width = m_rect.right - m_rect.left;
+    m_height = m_rect.bottom - m_rect.top;
 
     return S_OK;
 }
@@ -69,6 +74,7 @@ void Window::render()
 {
 }
 
-void Window::Destroy()
+void Window::destroy()
 {
 }
+

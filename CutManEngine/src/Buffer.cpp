@@ -85,8 +85,6 @@ Buffer::init(Device device, unsigned int ByteWidth) {
 	}
 }
 
-// Método para actualizar el buffer con nuevos datos
-
 void
 Buffer::update(DeviceContext& deviceContext,
 	unsigned int DstSubresource,
@@ -107,7 +105,7 @@ Buffer::render(DeviceContext& deviceContext,
 	unsigned int StartSlot,
 	unsigned int NumBuffers) {
 	if (m_bindFlag == D3D11_BIND_VERTEX_BUFFER) {
-		deviceContext.IASetVertexBuffer(StartSlot, NumBuffers, &m_buffer, &m_stride, &m_offset);
+		deviceContext.IASetVertexBuffers(StartSlot, 1, &m_buffer, &m_stride, &m_offset);
 	}
 	else if (m_bindFlag == D3D11_BIND_CONSTANT_BUFFER) {
 		deviceContext.m_deviceContext->VSSetConstantBuffers(StartSlot,
@@ -119,7 +117,6 @@ Buffer::render(DeviceContext& deviceContext,
 	}
 }
 
-// Método para renderizar utilizando el buffer como un vertex buffer
 
 void
 Buffer::render(DeviceContext& deviceContext, DXGI_FORMAT format) {
@@ -131,7 +128,13 @@ Buffer::render(DeviceContext& deviceContext, DXGI_FORMAT format) {
 	}
 }
 
-// Método para renderizar utilizando el buffer como un index buffer
+/*
+void Buffer::render(DeviceContext& deviceContext, unsigned int StartSlot)
+{
+	deviceContext.IASetVertexBuffers(StartSlot, 1, &m_vertexBuffer, &m_stride, &m_offset);
+}
+*/
+
 
 void Buffer::renderModel(DeviceContext& deviceContext, unsigned int StartSlot, unsigned int NumBuffers)
 {
@@ -139,7 +142,6 @@ void Buffer::renderModel(DeviceContext& deviceContext, unsigned int StartSlot, u
 	deviceContext.m_deviceContext->PSSetConstantBuffers(StartSlot, NumBuffers, &m_buffer);
 }
 
-// Método para liberar recursos del buffer
 void
 Buffer::destroy() {
 	SAFE_RELEASE(m_buffer);
