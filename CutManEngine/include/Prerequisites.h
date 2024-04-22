@@ -13,17 +13,16 @@
 # include <d3dcompiler.h>
 # include <xnamath.h>
 
-// windows
+
 # include <windows.h>
 
-// Internal Includes
+
 #include  "Resource.h"
 
-// MACRO for safe release of resources
 #define SAFE_RELEASE(x) if(x != nullptr) x->Release(); x = nullptr;
 
 //Macro para imprimir mensajes de depuración
-// * To check monster
+
 #define OutputLOG(_ClassName, _FunctionName, _OutputMessage)           \
 OutputDebugStringA(_ClassName);                                        \
 OutputDebugStringA(" : In Function : ");                               \

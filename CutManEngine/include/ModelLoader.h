@@ -19,10 +19,9 @@ public:
 	void
 		destroy();
 
-	//Carga un Mod desde el archivo OBJ
-
 	Mesh
-		Load(std::string objFileName); //Obj Nombre
+		Load(std::string objFileName);
 
 private:
+	//objl::Loader m_loader;
 };

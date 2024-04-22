@@ -17,6 +17,10 @@ void Device::destroy()
 	SAFE_RELEASE(m_device);
 }
 
+// Este metodo se utiliza para crear una vista de destino de renderizacion
+// (render target view) a partir de un recurso de DirectX 11.
+//Toma como parametros el recurso, una descripcion de la vista de destino de 
+// renderizacion y un puntero al objeto ID3D11RenderTargetView donde se almacenara.
 HRESULT Device::CreateRenderTargetView(ID3D11Resource* pResource,
 	const D3D11_RENDER_TARGET_VIEW_DESC* pDesc,
 	ID3D11RenderTargetView** ppRTView)
@@ -37,6 +41,10 @@ HRESULT Device::CreateRenderTargetView(ID3D11Resource* pResource,
 }
 
 
+//El metodo es para crear una textura 2D de DirectX11. 
+//Toma como Parametros una descripcion de la textura D3D11_TEXTURE2D_DESC, 
+// datos iniciales, un puntero al objeto ID3D11Texture2D donde se almacenara 
+//la textura creada
 HRESULT Device::CreateTexture2D(const D3D11_TEXTURE2D_DESC* pDesc,
 	const D3D11_SUBRESOURCE_DATA* pInitialData,
 	ID3D11Texture2D** ppTexture2D)
@@ -57,7 +65,7 @@ HRESULT Device::CreateTexture2D(const D3D11_TEXTURE2D_DESC* pDesc,
 	return hr;
 }
 
-
+//Crea una vista en el stencil a partir de un recurso de DirecX11.
 HRESULT Device::CreateDepthStencilView(ID3D11Resource* pResource,
 	const D3D11_DEPTH_STENCIL_VIEW_DESC* pDesc,
 	ID3D11DepthStencilView** ppDepthStencilView)
@@ -81,7 +89,9 @@ HRESULT Device::CreateDepthStencilView(ID3D11Resource* pResource,
 	return hr;
 }
 
-
+//Se utiliza para crear un sombreador de Vertices en DirectX11.
+//Toma parametros del codigo de bytes del sombreador, la longitud del codigo
+// de bytes y se almacenan
 HRESULT Device::CreateVertexShader(const void* pShaderBytecode,
 	unsigned int BytecodeLength,
 	ID3D11ClassLinkage* pClassLinkage,
@@ -111,7 +121,7 @@ HRESULT Device::CreateVertexShader(const void* pShaderBytecode,
 	return hr;
 }
 
- 
+//Crea un dise;o de entrada en el DirectX11. 
 HRESULT Device::CreateInputLayout(const D3D11_INPUT_ELEMENT_DESC* pInputElementDescs,
 	unsigned int NumElements,
 	const void* pShaderBytecodeWithInputSignature,
@@ -146,6 +156,9 @@ HRESULT Device::CreateInputLayout(const D3D11_INPUT_ELEMENT_DESC* pInputElementD
 	return hr;
 }
 
+//El metodo se usa para sombrear los pixeles 
+//Toma como parametros el codigo de bytes del sombreador, la longitud del codigo
+//de bytes, un objeto ID3D11ClassLinkage y puntero donde se almacenan
 HRESULT Device::CreatePixelShader(const void* pShaderBytecode,
 	unsigned int BytecodeLength,
 	ID3D11ClassLinkage* pClassLinkage,
@@ -200,6 +213,8 @@ HRESULT Device::CreateBuffer(const D3D11_BUFFER_DESC* pDesc,
 	return hr;
 }
 
+//Este metodo se utiliza para crear un estado de 
+// muestreador (sampler state) en DirectX 11.
 HRESULT Device::CreateSamplerState(const D3D11_SAMPLER_DESC* pSamplerDesc,
 	ID3D11SamplerState** ppSamplerState)
 {

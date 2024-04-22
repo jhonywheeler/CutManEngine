@@ -1,24 +1,23 @@
-#include "Prerequisites.h"
 #pragma once
+#include "Prerequisites.h"
 
-//Esta estructura esta encargada de almacenar la informacion que tendran nuestros objetos para despues dibujarse en pantalla
 
-/*struct SimpleVertex {
-	XMFLOAT3 Pos; //Posiciones
-	XMFLOAT2 Tex; //Coordenadas de Textura
-};*/
+//--------------------------------------------------------------------------------------
+// Structures
+//--------------------------------------------------------------------------------------
 
 struct
-	LoadData {
-	std::string name;
-	std::vector <SimpleVertex> vertex;
-	std::vector<unsigned int> index;
-	int numVertex;
-	int numIndex;
-
+    LoadData {
+    std::string name;
+    std::vector <SimpleVertex> vertex;
+    std::vector <unsigned int> index;
+    int numVertex;
+    int numIndex;
 };
 
-/*struct Camera {
-	XMMATRIX mView;
-	XMMATRIX mProjection;
-};*/
+struct
+    Vector3 {
+    float x = 0.0f;
+    float y = 0.0f;
+    float z = 0.0f;
+};

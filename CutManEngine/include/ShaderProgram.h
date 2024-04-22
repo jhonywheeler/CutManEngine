@@ -9,13 +9,12 @@ class DeviceContext;
 class ShaderProgram
 {
 public:
-	ShaderProgram() = default; //Comstructor
-	~ShaderProgram() {}; //Destructor
+	ShaderProgram() = default;
+	~ShaderProgram() {};
 
-	//
 	void init(Device device,
-				std::string fileName,
-				std::vector<D3D11_INPUT_ELEMENT_DESC> Layout);
+		std::string fileName,
+		std::vector<D3D11_INPUT_ELEMENT_DESC> Layout);
 
 	void update();
 
@@ -44,4 +43,3 @@ private:
 	ID3DBlob* m_vertexShaderData = nullptr;
 	ID3DBlob* m_pixelShaderData = nullptr;
 };
-

@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by CutManEngine.rc
+// Used by PLOPLO-Engine.rc
 //
 
 #define IDS_APP_TITLE           103

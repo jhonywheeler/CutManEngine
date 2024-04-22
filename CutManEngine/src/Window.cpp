@@ -69,6 +69,6 @@ void Window::render()
 {
 }
 
-void Window::Destroy()
+void Window::destroy()
 {
 }
