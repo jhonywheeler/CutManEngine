@@ -8,9 +8,10 @@ class DeviceContext;
 class Window;
 class Texture;
 
-// Definición de la clase SwapChain
-class SwapChain
-{
+// Swap chain es una coleccion de buffers 
+
+class
+	SwapChain {
 public:
 	// Constructor y destructor
 	SwapChain() = default;
@@ -19,28 +20,29 @@ public:
 	// Métodos públicos de la clase SwapChain
 
 	// Inicializa el intercambiador de memoria (swap chain)
+
 	void init(Device& device,
 		DeviceContext& deviceContext,
 		Texture& backBuffer,
-		Window window);
+		Window window); //Inicializa el Objeto
 
-	void update();
+	void
+		update();
 
-	void render();
+	void
+		render();
 
-	void destroy();
+	void
+		destroy();
 
-	void present();
+	void
+		present();
 
 public:
-
 	// Puntero al intercambiador de memoria DXGI
-	IDXGISwapChain* m_swapChain = nullptr;
-	// Tipo de controlador de gráficos utilizado 
-	D3D_DRIVER_TYPE m_driverType = D3D_DRIVER_TYPE_NULL;
-
+	IDXGISwapChain* m_swapChain = nullptr; 
+	D3D_DRIVER_TYPE m_driverType = D3D_DRIVER_TYPE_NULL; // Tipo de controlador de DirectX
 private:
 
-	// Nivel de características de D3D 
-	D3D_FEATURE_LEVEL m_featureLevel = D3D_FEATURE_LEVEL_11_0;
+	D3D_FEATURE_LEVEL m_featureLevel = D3D_FEATURE_LEVEL_11_0; // Nivel de características de D3D 
 };

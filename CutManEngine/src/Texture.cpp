@@ -2,16 +2,13 @@
 #include "Device.h"
 #include "DeviceContext.h"
 
-// Destructor 
 Texture::~Texture()
 {
 	/*
-	// Libera memoria si hay una text
 	if (m_texture != nullptr)
 	{
 		SAFE_RELEASE(m_texture);
 	}
-	// libera la memoria si hay una text imagen
 	else if (m_textureFromImg != nullptr)
 	{
 		SAFE_RELEASE(m_textureFromImg);
@@ -25,9 +22,10 @@ void Texture::init(Device device, std::string textureName)
 	// Vemos si device es valido
 	if (device.m_device == nullptr)
 	{
-		WARNING("ERROR: Texture::init : Error en los parámetros [VERIFICAR Device device]\n");
+		WARNING("ERROR: Texture::init : Error in data from params [CHECK FOR Device device] \n");
 		exit(1);
 	}
+
 	HRESULT hr = S_OK;
 	// Crear la text desde el archivo de imagen
 	hr = D3DX11CreateShaderResourceViewFromFile(device.m_device,
@@ -37,11 +35,12 @@ void Texture::init(Device device, std::string textureName)
 		&m_textureFromImg,
 		nullptr);
 	// Si la operación falla, mostrar un mensaje de error y salir del programa
-	if (FAILED(hr))
-	{
-		WARNING("ERROR: Texture::init : Error en los parámetros [VERIFICAR string textureName -> Verificar el nombre de la textura en la ruta de archivo]\n");
+	if (FAILED(hr)) {
+		WARNING("ERROR: Texture::init : Error in data from params [CHECK FOR string textureName -> Verify correct Texture name in Filepath] \n ");
 		exit(1);
 	}
+
+
 }
 
 // Inicializa una text creada en el momento
@@ -54,12 +53,12 @@ void Texture::init(Device device,
 	// Verificar si el device es válido y si las dimensiones son válidas
 	if (device.m_device == nullptr)
 	{
-		WARNING("ERROR: Texture::init : Error en los parámetros [VERIFICAR Device device]\n");
+		WARNING("ERROR: Texture::init : Error in data from params [CHECK FOR Device device] \n");
 		exit(1);
 	}
 	else if (width <= 0 || height <= 0)
 	{
-		WARNING("ERROR: Texture::init : Error en los parámetros [VERIFICAR unsigned int width O unsigned int height]\n");
+		WARNING("ERROR: Texture::init : Error in data from params {CHECK FOR unsigned int width OR unsigned int height] \n");
 		exit(1);
 	}
 	HRESULT hr = S_OK;
@@ -82,51 +81,42 @@ void Texture::init(Device device,
 	if (BindFlags == D3D11_BIND_DEPTH_STENCIL) {
 		hr = device.CreateTexture2D(&desc, nullptr, &m_texture);
 	}
-	else if (BindFlags == D3D11_BIND_RENDER_TARGET)
-	{
+	else if (BindFlags == D3D11_BIND_RENDER_TARGET) {
 		hr = device.CreateTexture2D(&desc, nullptr, &m_texture);
 	}
-
 	// Verificar si la text se creó correctamente
 	if (m_texture == nullptr)
 	{
-		WARNING("ERROR: Texture::init : Error en los parámetros [VERIFICAR m_texture]\n");
+		WARNING("ERROR: Testure::init : Error in data from params [CHECK FOR m_texture ] \n");
 		exit(1);
 	}
-	else if (FAILED(hr))
-	{
-		WARNING("ERROR: Texture::init : Error en los parámetros [VERIFICAR CreateTexture2D]\n");
+	else if (FAILED(hr)) {
+		WARNING("ERROR: Texture::init : Error in data from resource [CHECK FOR CreateTexture2D] \n");
 		exit(1);
 	}
-}
-
-void Texture::update()
-{
 }
 
 // Renderiza la text asignándola al contexto de device
-void Texture::render(DeviceContext& deviceContext, unsigned int StarSlot)
+void Texture::render(DeviceContext& deviceContext, unsigned int StartSlot, unsigned int NumViews)
 {
 	// Si la text proviene de un archivo de imagen
 	if (m_textureFromImg != nullptr)
 	{
 		// Asignar la text al contexto de device para el proceso de renderización
 		ID3D11ShaderResourceView* nullSRV[] = { nullptr };
-		deviceContext.PSSetShaderResources(StarSlot, 1, nullSRV);
-		deviceContext.PSSetShaderResources(StarSlot, 1, &m_textureFromImg);
+		deviceContext.PSSetShaderResources(StartSlot, NumViews, nullSRV);
+		deviceContext.PSSetShaderResources(StartSlot, NumViews, &m_textureFromImg);
 	}
 }
 
 // Libera la memoria asignada para las text
 void Texture::destroy()
 {
-	// Si existe una text, liberar su memoria
 	if (m_texture != nullptr)
 	{
 		SAFE_RELEASE(m_texture);
 	}
-	// Si existe una text de imagen, liberar su memoria
-	else if (m_textureFromImg != nullptr)
+	else if (m_textureFromImg != nullptr) // Si existe una text de imagen, liberar su memoria
 	{
 		SAFE_RELEASE(m_textureFromImg);
 	}

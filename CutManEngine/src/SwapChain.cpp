@@ -6,18 +6,18 @@
 
 // Método para inicializar el SwapChain
 
-void SwapChain::init(Device& device, 
-					 DeviceContext& deviceContext, 
-					 Texture& backBuffer, 
-					 Window window)
+void
+SwapChain::init(Device& device,
+    DeviceContext& deviceContext,
+    Texture& backBuffer,
+    Window window)
 {
     // Verificar si el identificador de Window es nulo
-
-	if (window.m_hWnd == nullptr)
-	{
-		WARNING("ERROR: SwapChain::init : Error in data from params [CHECK FOR Window window]\n");
-		exit(1);
-	}
+    if (window.m_hWnd == nullptr)
+    {
+        WARNING("ERROR: SnapChain::init : Error in data from params [CHECK FOR Window window ] \n");
+        exit(1);
+    }
     unsigned int createDeviceFlags = 0;
 #ifdef _DEBUG
     createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
@@ -38,7 +38,6 @@ void SwapChain::init(Device& device,
         D3D_FEATURE_LEVEL_10_0,
     };
     unsigned int numFeatureLevels = ARRAYSIZE(featureLevels);
-
     // Configuración del SwapChain
 
     DXGI_SWAP_CHAIN_DESC sd;
@@ -56,9 +55,7 @@ void SwapChain::init(Device& device,
     sd.Windowed = TRUE;
 
     HRESULT hr = S_OK;
-
     // Creación del Device y la SwapChain
-
     for (unsigned int driverTypeIndex = 0; driverTypeIndex < numDriverTypes; driverTypeIndex++)
     {
         m_driverType = driverTypes[driverTypeIndex];
@@ -67,15 +64,16 @@ void SwapChain::init(Device& device,
         if (SUCCEEDED(hr))
             break;
     }
-    if (FAILED(hr)) // Verificar si la creación fue exitosa
+    if (FAILED(hr))
     {
-        WARNING("ERROR: SwapChain::init : Error in data from params [CHECK FOR D3D11CreateDeviceAndSwapCahin()]\n");
+        WARNING("ERROR:  SwapChain::init : Error in data from method [CHECK FOR D3D11CreateDeviceAndSwapChain()]\n");
         exit(1);
-    }     // Obtener el Buffer del SwapChain
+    }
     hr = m_swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&backBuffer.m_texture);
-    if (FAILED(hr)){
-        WARNING("ERROR: SwapChain::init : Error in data from params [CHECK FOR m_swapChain->GetBuffer()]\n");
-    exit(1);
+    if (FAILED(hr))
+    {
+        WARNING("ERROR: SwapChain::init : Error in data from method [CHECK FOR m_swapChain->GetBuffer()] \n");
+        exit(1);
     }
 }
 
@@ -96,3 +94,4 @@ void SwapChain::present()
 {
     m_swapChain->Present(0, 0);
 }
+
