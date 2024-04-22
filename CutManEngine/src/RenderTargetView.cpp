@@ -4,10 +4,14 @@
 #include "Texture.h"
 #include "DepthStencilView.h"
 
-void RenderTargetView::init(Device device,
-	Texture backBuffer,
-	DXGI_FORMAT Format)
+// Método para inicializar la vista de RenderTargetView
+
+void RenderTargetView::init(Device device, 
+							Texture backBuffer, 
+							DXGI_FORMAT Format)
 {
+	// Verificar si el Device o la textura son nulos
+
 	if (device.m_device == nullptr)
 	{
 		WARNING("ERROR: RenderTargetView::init : Error in data from params [CHECK FOR Device device] \n");
@@ -21,9 +25,13 @@ void RenderTargetView::init(Device device,
 
 	HRESULT hr = S_OK;
 
+	// Configurar la descripción de la vista de RenderTargetView
+
 	D3D11_RENDER_TARGET_VIEW_DESC desc = {};
 	desc.Format = Format;
 	desc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+
+	// Crear la vista de RenderTargetView
 
 	hr = device.CreateRenderTargetView(backBuffer.m_texture, &desc, &m_renderTargetView);
 
@@ -32,7 +40,7 @@ void RenderTargetView::init(Device device,
 		WARNING("ERROR: RenderTargetView::init : Error in data from params [CHECK FOR CreateRenderTargetView()] \n");
 		exit(1);
 	}
-
+		
 }
 
 void RenderTargetView::update()
@@ -40,12 +48,17 @@ void RenderTargetView::update()
 
 }
 
-void RenderTargetView::render(DeviceContext& deviceContext,
-	DepthStencilView& depthStencilView,
-	unsigned int numViews,
-	float ClearColor[4])
+// Método para renderizar utilizando la vista de RenderTargetView y la vista de DepthStencilView
+
+void RenderTargetView::render(DeviceContext& deviceContext, 
+							  DepthStencilView& depthStencilView, 
+							  unsigned int numViews, 
+							  float ClearColor[4])
 {
+	// Limpiar la vista de RenderTargetView con el color especificado
+
 	deviceContext.ClearRenderTargetView(m_renderTargetView, ClearColor);
+
 	deviceContext.OMSetRenderTargets(numViews, &m_renderTargetView, depthStencilView.m_depthStencilView);
 
 }
