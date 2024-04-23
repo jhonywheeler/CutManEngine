@@ -6,6 +6,8 @@
 class Devide;
 class DeviceContext;
 
+// Estructura para almacenar los buffers de material
+
 struct
 	MaterialBuffer {
 	Texture albedo;
@@ -15,6 +17,7 @@ struct
 	Texture roughness;
 };
 
+// Enumeración para los tipos de textura
 
 enum TextureType {
 	NONE = 0,
@@ -32,7 +35,7 @@ class
 public:
 	Material() = default;
 	~Material() = default;
-
+	// Funciones para inicializar, actualizar, renderizar y destruir el material
 	void
 		init(Device device,
 			DeviceContext* deviceContext,

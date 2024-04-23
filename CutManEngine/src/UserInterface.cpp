@@ -5,20 +5,20 @@ UserInterface::init(void* window,
     ID3D11Device* device,
     ID3D11DeviceContext* deviceContext) {
 
-    // Setup Dear ImGui context
+    // Configura el context de Dear ImGui
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enabled keyboard controls
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
-    // Setup Dear ImGui style
+    // Configura el estilo de Dear ImGui
     ImGui::StyleColorsDark();
 
-    // Style ImGui
+    // Personaliza el estilo de ImGui
     embraceTheDarkness();
 
-    // Setup Plataform/Render backends
+    // Configura los backends de plataforma/renderizado
     ImGui_ImplWin32_Init(window);
     ImGui_ImplDX11_Init(device, deviceContext);
 }
@@ -26,7 +26,7 @@ UserInterface::init(void* window,
 void
 UserInterface::update() {
 
-    // Start the Dear ImGui frame
+    // Inicia el frame de Dear ImGui
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
@@ -34,12 +34,12 @@ UserInterface::update() {
 
 void
 UserInterface::render() {
-
+    // Renderiza Dear ImGui
     ImGui::Render();
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
     ImGuiIO& io = ImGui::GetIO();
 
-    // Update and render additional platform windows
+    // Actualiza y renderiza ventanas adicionales de la plataforma
     if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
         ImGui::UpdatePlatformWindows();
         ImGui::RenderPlatformWindowsDefault();
@@ -48,7 +48,7 @@ UserInterface::render() {
 
 void
 UserInterface::destroy() {
-    // CleanUp
+    // Limpieza
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();
     ImGui::DestroyContext();

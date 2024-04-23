@@ -58,10 +58,10 @@ HRESULT ShaderProgram::CompileShaderFromFile(char* szFileName,
 
 	DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
 #if defined( DEBUG ) || defined( _DEBUG )
-	// Set the D3DCOMPILE_DEBUG flag to embed debug information in the shaders.
-	// Setting this flag improves the shader debugging experience, but still allows 
-	// the shaders to be optimized and to run exactly the way they will run in 
-	// the release configuration of this program.
+	// Establece la bandera D3DCOMPILE_DEBUG para incrustar información de depuración en los sombreadores.
+	// Configurar esta bandera mejora la experiencia de depuración del sombreador, pero todavía permite
+	// que los sombreadores se optimicen y se ejecuten exactamente de la manera en que se ejecutarán en
+	// la configuración de lanzamiento de este programa.
 	dwShaderFlags |= D3DCOMPILE_DEBUG;
 #endif
 	ID3DBlob* pErrorBlob;

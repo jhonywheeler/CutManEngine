@@ -405,10 +405,7 @@ void update()
     g_modelBuffer.update(g_deviceContext, 0, nullptr, &cb, 0, 0);
 
     // Update light
-    //g_lightConfig.LightPos = XMFLOAT4(5.0f, 6.0f, -5.0f, 0); // Posición de la luz en el espacio 3D
-    //g_lightConfig.LightColor = XMFLOAT3(1.0f, 1.0f, 1.0f); // Color de la luz en RGB
-    //g_lightConfig.AmbientIntensity = 0.05f; // Intensidad ambiental de la luz+
-    //g_lightConfig.padding = 0.0f; // Padding to align to 16 bytes
+  
     g_lightBuffer.update(g_deviceContext, 0, nullptr, &g_lightConfig, 0, 0);
 
     // Update Camera Buffers

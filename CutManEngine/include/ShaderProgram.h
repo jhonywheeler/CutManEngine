@@ -12,7 +12,8 @@ public:
 	ShaderProgram() = default; //Comstructor
 	~ShaderProgram() {}; //Destructor
 
-	//
+	// Inicializa el programa de sombreado
+
 	void init(Device device,
 				std::string fileName,
 				std::vector<D3D11_INPUT_ELEMENT_DESC> Layout);

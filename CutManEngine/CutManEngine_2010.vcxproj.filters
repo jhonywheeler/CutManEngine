@@ -110,6 +110,12 @@
     <ClInclude Include="include\UserInterface.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="include\Commons.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Transform.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CutManEngine.cpp" />
@@ -177,6 +183,9 @@
       <Filter>Imgui\src</Filter>
     </ClCompile>
     <ClCompile Include="src\UserInterface.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Transform.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

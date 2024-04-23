@@ -9,6 +9,7 @@ void Viewport::init(Window window)
         WARNING("ERROR: Viewport::init : Error in data from params [CHECK FOR Window window]\n");
         exit(1);
     }
+    // Configurar las dimensiones de la ventana en el viewport
     m_viewport.Width = (float)window.m_width;
     m_viewport.Height = (float)window.m_height;
     m_viewport.MinDepth = 0.0f;

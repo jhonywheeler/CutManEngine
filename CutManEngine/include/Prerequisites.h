@@ -16,10 +16,9 @@
 // windows
 # include <windows.h>
 
-// Internal Includes
 #include  "Resource.h"
 
-// MACRO for safe release of resources
+// MACRO 
 #define SAFE_RELEASE(x) if(x != nullptr) x->Release(); x = nullptr;
 
 //Macro para imprimir mensajes de depuración
@@ -48,6 +47,8 @@ struct SimpleVertex
 	XMFLOAT3 Nor;
 };
 
+// Estructura para configuración de luces
+
 __declspec(align(16)) struct LightConfig
 {
 	XMFLOAT4 LightPos;
@@ -57,17 +58,23 @@ __declspec(align(16)) struct LightConfig
 	float LightIntensity;
 };
 
+// Estructura para los cambios en cada fotograma
+
 __declspec(align(16)) struct CBChangesEveryFrame
 {
 	XMMATRIX mWorld;
 	XMFLOAT4 vMeshColor;
 };
 
+// Estructura de cámara
+
 struct Camera
 {
 	XMMATRIX mView;
 	XMMATRIX mProjection;
 };
+
+// Estructura para almacenar mallas
 
 struct Mesh {
 

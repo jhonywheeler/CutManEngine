@@ -37,7 +37,6 @@ public:
     void
         render(DeviceContext& deviceContext, DXGI_FORMAT format);
 
-
     void
         render(DeviceContext& deviceContext, unsigned int StartSlot);
 
@@ -50,11 +49,9 @@ public:
 
 
 private:
+
     ID3D11Buffer* m_buffer = nullptr;
-
     unsigned int m_bindFlag = 0;
-
     unsigned int m_stride = sizeof(SimpleVertex);
-
     unsigned int m_offset = 0;
 };
